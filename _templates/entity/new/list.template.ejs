@@ -1,0 +1,15 @@
+---
+to: "<%= hasList ? ('./' + componentListName + '.vue') : null %>"
+---
+<template>
+  <q-page>
+    <TableContainer :container="container"
+      v-bind.sync="qTableConfig" />
+  </q-page>
+</template>
+
+
+<style scoped lang="scss">
+</style>
+
+<script src="./<%= componentListName %>.ts" lang="ts"></script>

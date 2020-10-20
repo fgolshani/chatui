@@ -1,0 +1,20 @@
+/*  <Font>  */
+$font-size: 14px;
+/*  </Font>  */
+/*  <Grid>  */
+$web: "(min-width: 1280px)";
+$tablet: "(min-width: 800px) and (max-width: 1279.99px)";
+$mobile: "(max-width: 799.99px)";
+$giant: "(min-width: 1600px)";
+$grid-columns: 12; // Set the number of columns.
+$gutter-width: 1rem; // Set the gutter between columns.
+$outer-margin: 1rem; // Set a margin for the container sides.
+$breakpoints: mob $mobile, tab $tablet, web $web;
+/*  </Grid>  */
+$multiplication: 1;
+$indexes: (0, 1, 2, 3, 4, 5);
+$amounts: (0, 0.5, 1, 2, 4, 8);
+$sides: (top, bottom, left, right);
+$unit: rem;
+
+$noRtl: #{"/* rtl:ignore */"};

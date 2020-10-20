@@ -1,0 +1,96 @@
+---
+to: ./<%= componentName %>.ts
+---
+import FormContainer, { ContainerData } from "@/components/Base/Forms/FormContainer";
+import { Form } from "@/components/Base/Forms/FormMaker";
+import { notifyConfig } from "@/utils/default";
+import { Validators } from "@/utils/validator";
+import { Component, Vue } from "vue-property-decorator";
+@Component({
+  components: {
+    FormContainer
+  }
+})
+export default class <%= componentName %> extends Vue {
+  entityId = null;
+  container: ContainerData = {
+    title: "فرم ایجاد <%= persianComponentName %>",
+    loading: false,
+    list: {
+      link: "<%= componentName.toLowerCase() %>/list"
+    },
+  }
+
+  form = new Form({
+      
+  })
+
+  created() {
+    this.entityId = this.$route.query.id
+    this.getData();
+    this.getEntity();
+  }
+
+  getEntity() {
+    if (!this.entityId) return
+    this.container.loading = true;
+    this.enityQuery()
+      .then(({ }) => {
+   
+        this.container.loading = false;
+      })
+      .catch(() => {
+        this.container.loading = false;
+      });
+  }
+
+    getData() {
+    return this.dataEntity()
+      .then(({  }) => {
+
+      })
+  }
+
+  submit() {
+    this.container.loading = true;
+    if (!this.entityId)
+      return this.entityMutation()
+        .then(() => {
+          this.$q.notify(notifyConfig.success)
+          this.container.loading = false
+          this.$router.push("<%= componentName.toLowerCase() %>/list");
+        }, () => this.container.loading = false)
+    else
+      return this.editMutation()
+        .then(() => {
+          this.$q.notify(notifyConfig.success)
+          this.container.loading = false
+          this.$router.push("<%= componentName.toLowerCase() %>/list");
+        }, () => this.container.loading = false)
+  }
+
+  enityQuery() {
+    return this.$fetch.query({
+        
+    });
+  }
+
+  dataEntity() {
+    return this.$fetch.query({
+
+    })
+  }
+
+  editMutation() {
+    return this.$fetch.mutation({
+
+    })
+  }
+
+  entityMutation() {
+    return this.$fetch.mutation({
+
+    })
+  }
+
+}

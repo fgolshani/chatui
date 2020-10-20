@@ -1,0 +1,116 @@
+---
+to: "<%= hasList ? ('./' + componentListName + '.ts') : null %>"
+---
+import TableContainer, { TableConfig, TableData } from "@/components/Base/TableContainer/TableContainer";
+import { notifyConfig } from "@/utils/default";
+import { ValueTypes } from "@/utils/graphql/graphql-zeus";
+import { Paginator } from "@/utils/paginator";
+import { EntityDetector } from "@/utils/util";
+import { Component, Vue } from "vue-property-decorator";
+//type GetEntityInput = ValueTypes["Query"]["getPresenter"][0]
+//type Entity = EntityDetector<<%= componentListName %>["getEntity"]>
+type GetEntityInput = any;
+type Entity = any;
+
+@Component({
+  components: {
+    TableContainer
+  }
+})
+export default class <%= componentListName %> extends Vue {
+  qTableConfig: TableConfig<Entity> = {
+    loading: false,
+    data: [],
+    selection: "single",
+    selected: [],
+    pagination: {
+      page: 1,
+      rowsPerPage: 5,
+      <%_ if (hasPagination) { -%>
+      rowsNumber: 0,
+      <%_ } -%>
+    },
+    events: {
+      "row-dblclick": (evt, row) => this.onDbClick(evt, row)
+    },
+    columns: [
+      {
+        key: "index",
+        label: "ردیف"
+      },
+    ],
+  }
+
+  filterForm = new Form({
+    
+  })
+
+  container: TableData = {
+    title: "نمایش جدولی <%= persianComponentName %>",
+    filterForm: this.filterForm,
+    add: {
+      link: "."
+    },
+    delete: {
+      handler: () => this.deleteEntity()
+    }
+  };
+
+  <%_ if (hasPagination) { -%>
+   paginator = new Paginator({
+     callback: this.getEntity.bind(this),
+     table: this.qTableConfig
+  })
+  <%_ } -%>
+
+  getEntity(input: GetEntityInput = {}) {
+    return this.entityQuery(input)
+      .then(({  }) => {
+        <%_ if (hasPagination) { -%>
+        //const queryList = []
+        //return { queryList, totalItemCount: getPresenter.totalItemCount }
+        <%_ } else {-%>
+        //const queryList = []
+        //this.qTableConfig.data = queryList
+        //return { queryList }
+        <%_ } -%>
+      })
+  }
+
+  deleteEntity() {
+    this.qTableConfig.loading = true;
+    this.deleteMutation()
+      .then(() => {
+        <%_if (!hasPagination) { -%>
+        this.getEntity();
+        <%_ } else { -%>
+        this.paginator.reset();
+        this.paginator.request()
+        <%_ } -%>
+        this.$q.notify(notifyConfig.success);
+      }, () => this.qTableConfig.loading = false);
+  }
+
+  entityQuery(input: GetEntityInput) {
+    return this.$fetch.query({
+
+    })
+  }
+
+  deleteMutation() {
+    const selectedRowId = this.qTableConfig.selected[0].id;
+    return this.$fetch.mutation({
+        
+    })
+  }
+
+
+  onDbClick(evt, row) {
+    this.$router.push({
+      path: ".",
+      query: {
+        id: row.id
+      }
+    })
+  }
+}

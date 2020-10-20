@@ -1,0 +1,18 @@
+@import "variables";
+
+.q-item.q-router-link--active {
+  color: unset;
+}
+
+.q-router-link--active {
+  color: unset;
+}
+
+.q-router-link--exact-active {
+  color: $primary !important;
+  color: var(--q-color-primary) !important;
+}
+
+.q-tab-panel {
+  padding: 0px;
+}

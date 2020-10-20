@@ -1,0 +1,112 @@
+$multiplication: 1;
+$indexes: (0, 1, 2, 3, 4, 5);
+$amounts: (0, 0.5, 1, 2, 4, 8);
+$sides: (top, bottom, left, right);
+$horizental: (right, left);
+$vertical: (top, bottom);
+$unit: rem;
+
+@each $side in $sides {
+  .m#{str-slice($side, 0, 1)}-auto {
+    margin-#{$side}: auto #{"/* rtl:ignore */"} !important;
+  }
+
+  .p#{str-slice($side, 0, 1)}-auto {
+    padding-#{$side}: auto #{"/* rtl:ignore */"} !important;
+  }
+}
+
+@each $index in $indexes {
+  @each $side in $sides {
+    .m#{str-slice($side, 0, 1)}-#{$index} {
+      margin-#{$side}: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+    }
+
+    .p#{str-slice($side, 0, 1)}-#{$index} {
+      padding-#{$side}: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+    }
+  }
+}
+
+@each $index in $indexes {
+  @each $side in $horizental {
+    .mx-#{$index} {
+      margin-left: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+      margin-right: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+    }
+
+    .px-#{$index} {
+      padding-left: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+      padding-right: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+    }
+  }
+
+  @each $side in $vertical {
+    .my-#{$index} {
+      margin-top: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+      margin-bottom: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+    }
+
+    .py-#{$index} {
+      padding-top: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+      padding-bottom: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+    }
+  }
+}
+
+@each $breakpoint in $breakpoints {
+  $name: nth($breakpoint, 1);
+  $size: nth($breakpoint, 2);
+
+  @media only screen and #{$size} {
+    @each $index in $indexes {
+      @each $side in $sides {
+        .m#{str-slice($side, 0, 1)}-#{$name}-#{$index} {
+          margin-#{$side}: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+        }
+
+        .p#{str-slice($side, 0, 1)}-#{$name}-#{$index} {
+          padding-#{$side}: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+        }
+
+        .m-#{$name}-#{$index} {
+          margin: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+        }
+
+        .p-#{$name}-#{$index} {
+          padding: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+        }
+
+        .my-#{$name}-#{$index} {
+          margin-top: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+          margin-bottom: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+        }
+
+        .py-#{$name}-#{$index} {
+          padding-top: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+          padding-bottom: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+        }
+
+        .mx-#{$name}-#{$index} {
+          margin-left: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+          margin-right: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+        }
+
+        .px-#{$name}-#{$index} {
+          padding-left: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+          padding-right: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+        }
+      }
+    }
+  }
+}
+
+@each $index in $indexes {
+  .m-#{$index} {
+    margin: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+  }
+
+  .p-#{$index} {
+    padding: #{nth($amounts, $index + 1) * $multiplication}#{$unit} #{"/* rtl:ignore */"} !important;
+  }
+}

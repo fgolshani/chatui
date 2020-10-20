@@ -1,0 +1,52 @@
+@import "../quasar.variables.scss";
+@import "./variables.scss";
+
+@font-face {
+  font-family: "Vazir";
+  src: url("/statics/fonts/Vazir.woff") format("woff");
+}
+
+html,
+body {
+  font-family: helvetica, sans-serif;
+  font-size: $font-size;
+  background-attachment: fixed;
+  background-color: $background-color;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  line-height: 2rem;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.loading {
+  position: relative;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(59, 59, 59, 0.301);
+    content: "";
+    z-index: 2;
+    cursor: progress;
+  }
+}
+
+.mwt {
+  max-width: 40rem;
+}
+
+.no-break {
+  white-space: nowrap;
+}

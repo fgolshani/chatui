@@ -1,0 +1,20 @@
+{
+	"extends": "@quasar/app/tsconfig-preset",
+	"compilerOptions": {
+		"paths": {
+			"@/*": [
+				"src/*"
+			]
+		},
+		"baseUrl": ".",
+		"experimentalDecorators": true,
+		"target": "es5",
+		"strictPropertyInitialization": false,
+		"noImplicitAny": false,
+		"strictNullChecks": false,
+		"resolveJsonModule": true,
+	},
+	"exclude": [
+		"./src/utils/vuex-class/**"
+	],
+}
